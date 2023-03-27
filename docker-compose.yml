@@ -1,0 +1,45 @@
+version: "3.5"
+
+services:
+  db:
+    container_name: db
+    image: postgres:14.5
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "accounts"
+    ports:
+      - "5432:5432"
+    volumes:
+      - account:/var/lib/postgresql/data
+    networks:
+      - account
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  account:
+    container_name: account
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: account:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=r2dbc:postgresql://db:5432/accounts
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    depends_on:
+      - db
+    networks:
+      - account
+networks:
+  account:
+    name: network_name
+volumes:
+  account:
+    driver: local
