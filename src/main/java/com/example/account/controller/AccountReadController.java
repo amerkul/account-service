@@ -1,6 +1,7 @@
 package com.example.account.controller;
 
 import com.example.account.event.AccountCreatedEvent;
+import com.example.account.event.Event;
 import com.example.account.projector.AccountProjector;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ public class AccountReadController {
     private final AccountProjector service;
 
     @GetMapping("/all")
-    public Flux<AccountCreatedEvent> list() {
+    public Flux<Event> list() {
         return service.retrieveAllEvents();
     }
 

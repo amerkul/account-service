@@ -13,7 +13,7 @@ public class AccountProjector {
 
     private final EventRepository repository;
 
-    public Flux<AccountCreatedEvent> retrieveAllEvents() {
+    public Flux<Event> retrieveAllEvents() {
         return repository.findAll();
     }
 

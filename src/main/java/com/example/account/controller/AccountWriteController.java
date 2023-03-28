@@ -18,7 +18,7 @@ public class AccountWriteController {
 
     @PostMapping( "/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<AccountCreatedEvent> create(@RequestBody CreateAccountCommand createAccountCommand) {
+    public Mono<Event> create(@RequestBody CreateAccountCommand createAccountCommand) {
         return service.save(createAccountCommand);
     }
 

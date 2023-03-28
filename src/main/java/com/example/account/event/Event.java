@@ -16,10 +16,17 @@ import java.util.UUID;
 @Table("event")
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class Event {
+public class Event {
 
+    @Column("event_id")
     private UUID eventId = UUID.randomUUID();
     private LocalDateTime created = LocalDateTime.now();
     private String type;
+    private String payload;
+
+    public Event(String type, String payload) {
+        this.type = type;
+        this.payload = payload;
+    }
 
 }

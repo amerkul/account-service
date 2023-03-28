@@ -2,12 +2,12 @@ spring:
   application:
     name: account
   liquibase:
-    url: jdbc:postgresql://${POSTGRES_DOMAIN}:5432/${POSTGRES_DB}
+    url: jdbc:${POSTGRES_HOST}://${POSTGRES_DOMAIN}:5432/${POSTGRES_DB}
     user: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
     change-log: classpath:db/changelog/db.changelog-master.yml
   r2dbc:
-    url: r2dbc:postgresql://${POSTGRES_DOMAIN}:5432
+    url: r2dbc:${POSTGRES_HOST}://${POSTGRES_DOMAIN}:5432
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
     name: ${POSTGRES_DB}

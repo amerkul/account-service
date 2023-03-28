@@ -10,18 +10,15 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Data
 @ToString
-@Table("event")
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccountCreatedEvent extends Event {
+public class AccountCreatedEvent{
 
-    @Id
     private Long id;
     private String name;
     private Integer balance;
     private Integer reserved;
     private BidStatus status;
-    @Column("auction_id")
     private Long auctionId;
 
 }
