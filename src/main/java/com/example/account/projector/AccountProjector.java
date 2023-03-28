@@ -1,8 +1,7 @@
 package com.example.account.projector;
 
 import com.example.account.event.AccountCreatedEvent;
-import com.example.account.event.Event;
-import com.example.account.repository.EventRepository;
+import com.example.account.repository.AccountCreatedRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -11,7 +10,7 @@ import reactor.core.publisher.Flux;
 @AllArgsConstructor
 public class AccountProjector {
 
-    private final EventRepository repository;
+    private final AccountCreatedRepository repository;
 
     public Flux<AccountCreatedEvent> retrieveAllEvents() {
         return repository.findAll();

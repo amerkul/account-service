@@ -2,7 +2,6 @@ package com.example.account.controller;
 
 import com.example.account.aggregate.AccountAggregate;
 import com.example.account.command.CreateAccountCommand;
-import com.example.account.event.AccountCreatedEvent;
 import com.example.account.event.Event;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +17,7 @@ public class AccountWriteController {
 
     @PostMapping( "/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<AccountCreatedEvent> create(@RequestBody CreateAccountCommand createAccountCommand) {
+    public Mono<Event> create(@RequestBody CreateAccountCommand createAccountCommand) {
         return service.save(createAccountCommand);
     }
 

@@ -1,6 +1,5 @@
 package com.example.account.event;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table("event")
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccountCreatedEvent extends Event {
+public class AccountUpdatedEvent extends Event {
 
     @Id
     private Long id;
@@ -23,7 +22,6 @@ public class AccountCreatedEvent extends Event {
     private Integer reserved;
     private BidStatus status;
     @Column("auction_id")
-    @JsonProperty("auction_id")
     private String auctionId;
 
 }

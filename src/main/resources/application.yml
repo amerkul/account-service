@@ -11,6 +11,28 @@ spring:
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
     name: ${POSTGRES_DB}
+  kafka:
+    topics:
+      bid: bidTopic
+      answer: answerTopic
+    bootstrap-servers: ${HOST}:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: reactivekafkagroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            use:
+              type:
+                headers: false
+            value:
+              default:
+                type: com.example.account.command.UpdateAccountCommand
 logging:
   level:
     org.springframework.web: WARN
