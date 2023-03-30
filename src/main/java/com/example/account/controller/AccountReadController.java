@@ -1,8 +1,7 @@
 package com.example.account.controller;
 
-import com.example.account.event.AccountCreatedEvent;
-import com.example.account.event.Event;
-import com.example.account.projector.AccountProjector;
+import com.example.account.aggregate.AccountAggregate;
+import com.example.account.service.projector.AccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +13,10 @@ import reactor.core.publisher.Flux;
 @RequestMapping("/accounts")
 public class AccountReadController {
 
-    private final AccountProjector service;
+    private final AccountService service;
 
     @GetMapping("/all")
-    public Flux<Event> list() {
+    public Flux<AccountAggregate> list() {
         return service.retrieveAllEvents();
     }
 

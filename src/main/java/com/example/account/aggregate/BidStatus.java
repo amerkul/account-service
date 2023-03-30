@@ -1,4 +1,4 @@
-package com.example.account.event;
+package com.example.account.aggregate;
 
 public enum BidStatus {
 
