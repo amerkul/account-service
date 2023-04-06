@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccountCreatedEvent extends EventEntity {
+public class AccountUpdatedEvent extends EventEntity {
 
     private Long accountId;
     private String name;
@@ -32,7 +32,7 @@ public class AccountCreatedEvent extends EventEntity {
         this.accountId = accountAggregate.getAccountId();
         ObjectMapper objectMapper = new ObjectMapper();
         super.setPayload(objectMapper.writeValueAsString(this));
-        super.setType(AccountCreatedEvent.class.getName());
+        super.setType(this.getClass().getName());
     }
 
 }
