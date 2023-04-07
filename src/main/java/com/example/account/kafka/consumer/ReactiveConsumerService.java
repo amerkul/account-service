@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class ReactiveKafkaConsumer {
+public class ReactiveConsumerService {
 
     private final ReactiveKafkaConsumerTemplate<String, UpdateAccountCommand> consumerTemplate;
     private final CommandService service;
@@ -17,11 +17,10 @@ public class ReactiveKafkaConsumer {
     @PostConstruct
     public void init() {
         consumerTemplate.receive()
-                        .subscribe(record -> {
-                            service.update(record.value());
-                            record.receiverOffset()
-                                      .acknowledge();
-                        });
+                .subscribe(record -> {
+                    service.update(record.value()).subscribe();
+                    record.receiverOffset().acknowledge();
+                });
     }
 
 }
