@@ -19,6 +19,6 @@ public class AccountAggregate {
     private Integer reserved;
     private BidStatus status;
     @Column("auction_id")
-    private Long auctionId;
+    private String auctionId;
 
 }
