@@ -6,7 +6,7 @@ CREATE TABLE event (
 );
 
 CREATE TABLE account (
-    account_id BIGSERIAL PRIMARY KEY
+    account_id BIGSERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     balance INTEGER NOT NULL,
     reserved INTEGER NOT NULL,
