@@ -23,4 +23,5 @@ jobs:
         kubectl apply -f src/infra
     - name: Test service URLs
       run: |
+        sleep 120
         kubectl get all
