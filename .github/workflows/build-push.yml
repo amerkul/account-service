@@ -7,21 +7,15 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       contents: read
       packages: write
 
     steps:
     - uses: actions/checkout@v3
-    - name: Start minikube
-      uses: medyagh/setup-minikube@master
     - name: Try the cluster !
       run: kubectl get pods -A    
     - name: Deploy to minikube
       run:
         kubectl apply -f src/infra
-    - name: Test service URLs
-      run: |
-        sleep 120
-        kubectl get all
