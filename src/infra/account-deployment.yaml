@@ -5,7 +5,7 @@ metadata:
     app: account
   name: account
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: account
@@ -20,38 +20,47 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: HOST
-                  name: env
+                  name: account-env
             - name: POSTGRES_DB
               valueFrom:
                 configMapKeyRef:
                   key: POSTGRES_DB
-                  name: env
+                  name: account-env
             - name: POSTGRES_DOMAIN
               valueFrom:
                 configMapKeyRef:
                   key: POSTGRES_DOMAIN
-                  name: env
+                  name: account-env
             - name: POSTGRES_HOST
               valueFrom:
                 configMapKeyRef:
                   key: POSTGRES_HOST
-                  name: env
+                  name: account-env
             - name: POSTGRES_PASSWORD
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: POSTGRES_PASSWORD
-                  name: env
+                  name: account-secret
             - name: POSTGRES_USER
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: POSTGRES_USER
-                  name: env
+                  name: account-secret
             - name: SPRING_DATASOURCE_PASSWORD
-              value: postgres
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: account-secret
             - name: SPRING_DATASOURCE_URL
-              value: r2dbc:postgresql://db:5432/accounts
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_DATASOURCE_URL
+                  name: account-env
             - name: SPRING_DATASOURCE_USERNAME
-              value: postgres
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_USER
+                  name: account-secret
           image: amerkul/account-service:1.0.3
           name: account
           ports:

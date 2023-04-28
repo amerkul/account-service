@@ -17,19 +17,40 @@ spec:
       containers:
         - env:
             - name: KAFKA_ADVERTISED_LISTENERS
-              value: PLAINTEXT://kafka-service:9092
+              valueFrom:
+                configMapKeyRef:
+                  key: KAFKA_ADVERTISED_LISTENERS
+                  name: account-env
             - name: KAFKA_BROKER_ID
-              value: "1"
+              valueFrom:
+                configMapKeyRef:
+                  key: KAFKA_BROKER_ID
+                  name: account-env
             - name: KAFKA_DEFAULT_REPLICATION_FACTOR
-              value: "1"
+              valueFrom:
+                configMapKeyRef:
+                  key: KAFKA_DEFAULT_REPLICATION_FACTOR
+                  name: account-env
             - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
-              value: "1"
+              valueFrom:
+                configMapKeyRef:
+                  key: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
+                  name: account-env
             - name: KAFKA_TRANSACTION_STATE_LOG_MIN_ISR
-              value: "1"
+              valueFrom:
+                configMapKeyRef:
+                  key: KAFKA_TRANSACTION_STATE_LOG_MIN_ISR
+                  name: account-env
             - name: KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR
-              value: "1"
+              valueFrom:
+                configMapKeyRef:
+                  key: KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR
+                  name: account-env
             - name: KAFKA_ZOOKEEPER_CONNECT
-              value: zookeeper:2181
+              valueFrom:
+                configMapKeyRef:
+                  key: KAFKA_ZOOKEEPER_CONNECT
+                  name: account-env
           image: confluentinc/cp-kafka:7.3.0
           name: kafka-service
           ports:

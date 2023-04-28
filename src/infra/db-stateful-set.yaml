@@ -2,28 +2,35 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
-    app: db
-  name: db
+    app: account-db
+  name: account-db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: db
+      app: account-db
+  serviceName: "db"
   template:
     metadata:
       labels:
-        app: db
+        app: account-db
     spec:
       containers:
         - env:
             - name: POSTGRES_DB
               value: accounts
-            - name: POSTGRES_PASSWORD
-              value: postgres
             - name: POSTGRES_USER
-              value: postgres
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_USER
+                  name: account-secret
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: account-secret
           image: postgres:14.5
-          name: db
+          name: account-db
           ports:
             - containerPort: 5432
           volumeMounts:
