@@ -23,7 +23,4 @@ jobs:
         kubectl apply -f src/infra
     - name: Test service URLs
       run: |
-        minikube service list
-        minikube service account --url
-        echo "------------------opening the service------------------"
-        curl $(minikube service account --url)   
+        kubectl get all
