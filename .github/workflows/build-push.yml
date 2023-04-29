@@ -18,5 +18,6 @@ jobs:
           set -ex
           cd $HOME
           wget https://dl.k8s.io/release/v1.26.0/bin/linux/arm64/kubectl
-          chmod +x kubectl
-          kubectl get pods
+          chmod +x ./kubectl
+          ./kubectl get pods 
+
