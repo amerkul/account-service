@@ -5,7 +5,7 @@ on:
     branches: [istio-k8s]
 
 jobs:
-  build:
+  deployment:
 
     runs-on: self-hosted
     permissions:
@@ -16,4 +16,7 @@ jobs:
     - uses: actions/checkout@v3  
     - name: Deploy to minikube
       run: |
-        kubectl install --help
+          set -ex
+          cd $HOME
+          wget https://dl.k8s.io/release/v1.26.0/bin/linux/arm64/kubectl
+          kubectl get all
