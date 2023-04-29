@@ -17,6 +17,6 @@ jobs:
       run: |
           set -ex
           cd $HOME
-          wget https://dl.k8s.io/release/v1.28.0/bin/linux/arm64/kubectl
+          wget https://dl.k8s.io/release/v1.27.0/bin/linux/amd64/kubectl
           chmod +x ./kubectl
           ./kubectl version --client
