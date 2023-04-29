@@ -15,5 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3  
     - name: Deploy to minikube
-      run:
+      run: |
+        install kubectl
         kubectl apply -f src/infra
