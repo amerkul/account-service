@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: zookeeper
+  name: zookeeper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zookeeper
+  template:
+    metadata:
+      labels:
+        app: zookeeper
+    spec:
+      containers:
+        - env:
+            - name: ZOOKEEPER_CLIENT_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: ZOOKEEPER_CLIENT_PORT
+                  name: account-env
+            - name: ZOOKEEPER_TICK_TIME
+              valueFrom:
+                configMapKeyRef:
+                  key: ZOOKEEPER_TICK_TIME
+                  name: account-env
+          image: confluentinc/cp-zookeeper:7.3.0
+          name: zookeeper
+          ports:
+            - containerPort: 2181
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: account
+      restartPolicy: Always
+      volumes:
+        - name: account
+          persistentVolumeClaim:
+            claimName: account
