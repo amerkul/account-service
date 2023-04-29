@@ -7,10 +7,9 @@ on:
 jobs:
   deployment:
 
-    runs-on: self-hosted
-    permissions:
-      contents: read
-      packages: write
+    runs-on:
+      - self-hosted
+      - actions_runner_dev
 
     steps:
     - uses: actions/checkout@v3  
