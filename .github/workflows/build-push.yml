@@ -19,4 +19,4 @@ jobs:
           cd $HOME
           wget https://dl.k8s.io/release/v1.27.0/bin/linux/amd64/kubectl
           chmod +x ./kubectl
-          ./kubectl version --client
+          ./kubectl apply -f src/infra -w
