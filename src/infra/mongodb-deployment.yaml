@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: mongodb
+  name: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  serviceName: "mongodb"
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - env:
+            - name: MONGO_INITDB_DATABASE
+              value: auctions
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: root
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+          image: mongo:5.0.17
+          name: mongodb
+          volumeMounts:
+            - mountPath: /data/db
+              name: mongodb
+      restartPolicy: Always
+      volumes:
+        - name: mongodb
+          persistentVolumeClaim:
+            claimName: mongodb

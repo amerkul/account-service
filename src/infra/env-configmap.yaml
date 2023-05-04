@@ -1,11 +1,11 @@
 apiVersion: v1
 data:
-  HOST: kafka-service
+  HOST: my-cluster-kafka-bootstrap
   POSTGRES_DB: accounts
-  POSTGRES_DOMAIN: db
+  POSTGRES_DOMAIN: account-db
   POSTGRES_HOST: postgresql
   SPRING_DATASOURCE_URL: r2dbc:postgresql://db:5432/accounts
-  KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-service:9092
+  KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://my-cluster-kafka-bootstrap:9092
   KAFKA_BROKER_ID: "1"
   KAFKA_DEFAULT_REPLICATION_FACTOR: "1"
   KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
