@@ -34,21 +34,3 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         
-  deployment:
-
-    runs-on:
-      - self-hosted
-      - actions_runner_dev
-
-    steps:
-    - uses: actions/checkout@v3  
-    - name: Deploy to minikube
-      run: |
-          set -ex
-          cd $HOME
-          wget https://dl.k8s.io/release/v1.27.0/bin/linux/amd64/kubectl
-          chmod +x ./kubectl
-          ./kubectl auth can-i get pods
-          ./kubectl get pods 
-          ./kubectl set image deployment.apps/account account=amerkul/account-service:latest
-          ./kubectl rollout restart deployment.apps/account

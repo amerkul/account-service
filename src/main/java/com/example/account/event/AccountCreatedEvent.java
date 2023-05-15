@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.ToString;
+import org.springframework.data.annotation.Transient;
 
 @Data
 @ToString
@@ -15,11 +16,17 @@ import lombok.ToString;
 @AllArgsConstructor
 public class AccountCreatedEvent extends EventEntity {
 
+    @Transient
     private Long accountId;
+    @Transient
     private String name;
+    @Transient
     private Integer balance;
+    @Transient
     private Integer reserved;
+    @Transient
     private BidStatus status;
+    @Transient
     private String auctionId;
 
     @SneakyThrows

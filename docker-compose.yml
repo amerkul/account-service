@@ -3,11 +3,12 @@ version: "3.5"
 services:
   db:
     container_name: db
-    image: postgres:14.5
+    image: debezium/postgres:14-alpine
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
       POSTGRES_DB: "accounts"
+    command: [ "postgres", "-c", "wal_level=logical" ]
     ports:
       - "5432:5432"
     volumes:
@@ -39,32 +40,94 @@ services:
     networks:
       - account
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.3.0
+    image: quay.io/debezium/zookeeper:2.1
     hostname: zookeeper
     container_name: zookeeper
     ports:
       - "2181:2181"
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
     networks:
       - kafka
   kafka:
-    image: confluentinc/cp-kafka:7.3.0
+    image: quay.io/debezium/kafka:2.1
+    ports:
+      - "9092:9092"
     hostname: kafka
     container_name: kafka
     depends_on:
       - zookeeper
-    ports:
-      - "9092:9092"
+    links:
+      - zookeeper
     environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://kafka:9092'
-      KAFKA_DEFAULT_REPLICATION_FACTOR: 1
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      - ZOOKEEPER_CONNECT=zookeeper:2181
+    networks:
+      - kafka
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.10
+    container_name: elasticsearch
+    restart: unless-stopped
+    volumes:
+      - esdata1:/var/lib/elasticsearch/data
+    environment:
+      - “ES_JAVA_OPTS=-Xms512m -Xmx512m”
+      - TZ=Europe/Minsk
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+    ports:
+      - "9300:9300"
+      - "9200:9200"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    networks:
+      - elastic
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.10
+    container_name: kibana
+    restart: unless-stopped
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+      SERVER_NAME: Kibana
+      TZ: Europe/Minsk
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - elastic
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.17.10
+    container_name: logstash
+    command: logstash -f /etc/logstash/conf.d/logstash.conf
+    volumes:
+      - ./logstash:/etc/logstash/conf.d
+    ports:
+      - "5001:5001"
+    networks:
+      - elastic
+  connect:
+    image: debezium/connect-jdbc-es:2.1
+    build:
+      context: debezium-jdbc-es
+      args:
+        DEBEZIUM_VERSION: ${DEBEZIUM_VERSION}
+    ports:
+      - 8083:8083
+      - 5005:5005
+    links:
+      - kafka
+      - db
+      - elasticsearch
+    environment:
+      - BOOTSTRAP_SERVERS=kafka:9092
+      - GROUP_ID=1
+      - CONFIG_STORAGE_TOPIC=my_connect_configs
+      - OFFSET_STORAGE_TOPIC=my_connect_offsets
+      - STATUS_STORAGE_TOPIC=my_source_connect_statuses
     networks:
       - kafka
 networks:
@@ -72,6 +135,10 @@ networks:
     name: network_name
   account:
     name: network_name
+  elastic:
+    name: network_name
 volumes:
+  esdata1:
+    driver: local
   account:
     driver: local
