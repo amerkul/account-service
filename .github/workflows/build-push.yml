@@ -9,6 +9,7 @@ on:
 
 jobs:
   check:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -27,7 +28,7 @@ jobs:
       run: mvn --batch-mode --update-snapshots package
 
   build:
-
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
       contents: read
