@@ -7,7 +7,7 @@ import com.example.account.command.UpdateAccountCommand;
 import com.example.account.event.AccountCreatedEvent;
 import com.example.account.event.AccountUpdatedEvent;
 import com.example.account.event.EventHandler;
-import com.example.account.kafka.producer.ReactiveProducerService;
+import com.example.account.kafka.producer.ProducerService;
 import com.example.account.repository.AccountRepository;
 import com.example.account.service.command.CommandService;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
 @AllArgsConstructor
 public class CommandServiceImpl implements CommandService {
 
-    private final ReactiveProducerService producerService;
+    private final ProducerService producerService;
     private final AccountRepository accountRepository;
     private final EventHandler eventHandler;
 
