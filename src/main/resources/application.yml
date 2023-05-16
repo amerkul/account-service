@@ -39,3 +39,8 @@ logging:
     com.example: DEBUG
 server:
   port: 8080
+elastic:
+  host: ${ELASTIC_HOST}
+  port: ${ELASTIC_PORT}
+  index: ${ELASTIC_INDEX}
+
