@@ -23,7 +23,7 @@ services:
   account:
     container_name: account
     env_file:
-      - .env
+      - dev.env
     build:
       context: .
       dockerfile: Dockerfile
@@ -130,7 +130,19 @@ services:
       - STATUS_STORAGE_TOPIC=my_source_connect_statuses
     networks:
       - kafka
+  grafana:
+    image: grafana/grafana:7.5.7
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - grafana
+
 networks:
+  grafana:
+    name: network_name
   kafka:
     name: network_name
   account:
@@ -138,6 +150,8 @@ networks:
   elastic:
     name: network_name
 volumes:
+  grafana-data:
+    driver: local
   esdata1:
     driver: local
   account:

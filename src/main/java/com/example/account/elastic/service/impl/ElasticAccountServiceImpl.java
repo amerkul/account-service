@@ -1,15 +1,15 @@
 package com.example.account.elastic.service.impl;
 
 import com.example.account.elastic.data.Account;
+import com.example.account.elastic.data.criteria.AccountCriteria;
 import com.example.account.elastic.repository.ElasticAccountRepository;
 import com.example.account.elastic.service.ElasticAccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.Map;
 
 @Slf4j
 @Service
@@ -37,9 +37,9 @@ public class ElasticAccountServiceImpl implements ElasticAccountService {
     }
 
     @Override
-    public Flux<Account> retrieveByParams(Map<String, String> params) {
-        log.debug("Params: " + params);
-        return null;
+    public Flux<Account> retrieveByParams(AccountCriteria criteria, Pageable pageable) {
+        log.debug("Account criteria: " + criteria);
+        return elasticAccountRepository.findByCriteria(criteria, pageable);
     }
 
 }

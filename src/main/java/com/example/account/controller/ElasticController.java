@@ -1,9 +1,14 @@
 package com.example.account.controller;
 
+import com.example.account.controller.dto.AccountCriteriaDto;
 import com.example.account.elastic.data.Account;
+import com.example.account.elastic.data.criteria.AccountCriteria;
 import com.example.account.elastic.service.ElasticAccountService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.Map;
-
 @Slf4j
 @RestController
 @AllArgsConstructor
@@ -21,6 +24,7 @@ import java.util.Map;
 public class ElasticController {
 
     private final ElasticAccountService service;
+    private final ModelMapper mapper;
 
     @GetMapping("/{id}")
     public Mono<Account> getById(@PathVariable("id") long id) {
@@ -42,9 +46,12 @@ public class ElasticController {
     }
 
     @GetMapping("/query")
-    public Flux<Account> getByQuery(@RequestParam Map<String,String> params) {
+    public Flux<Account> getByQuery(@RequestParam("page") int page,
+                                    @RequestParam("size") int size,
+                                    final AccountCriteriaDto accountCriteriaDto) {
         log.debug("Started getByQuery method with account query");
-        return service.retrieveByParams(params);
+        AccountCriteria accountCriteria = mapper.map(accountCriteriaDto, AccountCriteria.class);
+        return service.retrieveByParams(accountCriteria, PageRequest.of(page, size));
     }
 
 }
