@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class ReactiveConsumerService {
+public class ConsumerService {
 
     private final ReactiveKafkaConsumerTemplate<String, UpdateAccountCommand> consumerTemplate;
     private final CommandService service;

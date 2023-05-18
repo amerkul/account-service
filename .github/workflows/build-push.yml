@@ -5,9 +5,9 @@ on:
     branches: [main]
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
+  check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-20.04
     permissions:
       contents: read
       packages: write

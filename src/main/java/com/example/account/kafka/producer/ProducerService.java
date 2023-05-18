@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class ReactiveProducerService {
+public class ProducerService {
 
     private final ReactiveKafkaProducerTemplate<String, AccountCreatedEvent> reactiveKafkaProducerTemplate;
 
     @Value("${spring.kafka.topics.bid}")
     private String topic;
 
-    public ReactiveProducerService(ReactiveKafkaProducerTemplate<String, AccountCreatedEvent> reactiveKafkaProducerTemplate) {
+    public ProducerService(ReactiveKafkaProducerTemplate<String, AccountCreatedEvent> reactiveKafkaProducerTemplate) {
         this.reactiveKafkaProducerTemplate = reactiveKafkaProducerTemplate;
     }
 
