@@ -1,7 +1,9 @@
 package com.example.account.aggregate;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
@@ -9,6 +11,8 @@ import org.springframework.data.relational.core.mapping.Table;
 @Data
 @Builder
 @Table("account")
+@NoArgsConstructor
+@AllArgsConstructor
 public class AccountAggregate {
 
     @Id

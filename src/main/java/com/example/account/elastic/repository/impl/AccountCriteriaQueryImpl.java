@@ -4,7 +4,6 @@ import com.example.account.elastic.data.criteria.AccountCriteria;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.elasticsearch.core.query.Criteria;
 import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
-import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class AccountCriteriaQueryImpl implements AccountCriteriaQuery {
 
     @Override
-    public Query createAccountCriteriaQuery(AccountCriteria accountCriteria) {
+    public CriteriaQuery createAccountCriteriaQuery(AccountCriteria accountCriteria) {
         log.debug("Account criteria entity " + accountCriteria);
         Criteria criteria = new Criteria();
         if (accountCriteria.getName() != null) {

@@ -1,7 +1,6 @@
 package com.example.account.elastic.data.criteria;
 
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 @Data
 @ToString

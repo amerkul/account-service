@@ -23,7 +23,7 @@ services:
   account:
     container_name: account
     env_file:
-      - dev.env
+      - .env
     build:
       context: .
       dockerfile: Dockerfile
