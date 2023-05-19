@@ -13,35 +13,15 @@ public class AccountCriteriaQueryImpl implements AccountCriteriaQuery {
     @Override
     public CriteriaQuery createAccountCriteriaQuery(AccountCriteria accountCriteria) {
         log.debug("Account criteria entity " + accountCriteria);
-        Criteria criteria = new Criteria();
-        if (accountCriteria.getName() != null) {
-            criteria.and(Criteria.where("name")
-                    .contains(accountCriteria.getName()));
-        }
-        if (accountCriteria.getBalanceGte() != null) {
-            criteria.and(Criteria.where("balance")
-                    .greaterThanEqual(accountCriteria.getBalanceGte()));
-        }
-        if (accountCriteria.getBalanceLte() != null) {
-            criteria.and(Criteria.where("balance")
-                    .lessThanEqual(accountCriteria.getBalanceLte()));
-        }
-        if (accountCriteria.getStatus() != null) {
-            criteria.and(Criteria.where("status")
-                    .is(accountCriteria.getStatus()));
-        }
-        if (accountCriteria.getAuctionId() != null) {
-            criteria.and(Criteria.where("auction_id")
-                    .is(accountCriteria.getAuctionId()));
-        }
-        if (accountCriteria.getReservedGte() != null) {
-            criteria.and(Criteria.where("reserved")
-                    .greaterThanEqual(accountCriteria.getReservedGte()));
-        }
-        if (accountCriteria.getReservedLte() != null) {
-            criteria.and(Criteria.where("reserved")
-                    .lessThanEqual(accountCriteria.getReservedLte()));
-        }
+        Criteria criteria = new AccountCriteriaBuilder()
+                .containsIfNotNull(accountCriteria.getName(), "name")
+                .greaterThanEqualIfNotNull(accountCriteria.getBalanceGte(), "balance")
+                .lessThanEqualIfNotNull(accountCriteria.getBalanceLte(), "balance")
+                .isIfNotNull(accountCriteria.getStatus(), "status")
+                .isIfNotNull(accountCriteria.getAuctionId(), "auction_id")
+                .greaterThanEqualIfNotNull(accountCriteria.getReservedGte(), "reserved")
+                .lessThanEqualIfNotNull(accountCriteria.getReservedLte(), "reserved")
+                .getCriteria();
         return new CriteriaQuery(criteria);
     }
 
