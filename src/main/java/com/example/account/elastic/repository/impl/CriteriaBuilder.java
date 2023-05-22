@@ -2,7 +2,7 @@ package com.example.account.elastic.repository.impl;
 
 import org.springframework.data.elasticsearch.core.query.Criteria;
 
-public final class AccountCriteriaBuilder {
+public final class CriteriaBuilder {
 
     private final Criteria criteria = new Criteria();
 
@@ -10,7 +10,7 @@ public final class AccountCriteriaBuilder {
         return criteria;
     }
 
-    public AccountCriteriaBuilder containsIfNotNull(Object object, String field) {
+    public CriteriaBuilder containsIfNotNull(Object object, String field) {
         if (object != null) {
             criteria.and(Criteria.where(field)
                     .contains(object.toString()));
@@ -18,7 +18,7 @@ public final class AccountCriteriaBuilder {
         return this;
     }
 
-    public AccountCriteriaBuilder isIfNotNull(Object object, String field) {
+    public CriteriaBuilder isIfNotNull(Object object, String field) {
         if (object != null) {
             criteria.and(Criteria.where(field)
                     .is(object.toString()));
@@ -26,7 +26,7 @@ public final class AccountCriteriaBuilder {
         return this;
     }
 
-    public AccountCriteriaBuilder greaterThanEqualIfNotNull(Object object, String field) {
+    public CriteriaBuilder greaterThanEqualIfNotNull(Object object, String field) {
         if (object != null) {
             criteria.and(Criteria.where(field)
                     .greaterThanEqual(object.toString()));
@@ -34,7 +34,7 @@ public final class AccountCriteriaBuilder {
         return this;
     }
 
-    public AccountCriteriaBuilder lessThanEqualIfNotNull(Object object, String field) {
+    public CriteriaBuilder lessThanEqualIfNotNull(Object object, String field) {
         if (object != null) {
             criteria.and(Criteria.where(field)
                     .lessThanEqual(object.toString()));

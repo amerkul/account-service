@@ -13,7 +13,7 @@ public class AccountCriteriaQueryImpl implements AccountCriteriaQuery {
     @Override
     public CriteriaQuery createAccountCriteriaQuery(AccountCriteria accountCriteria) {
         log.debug("Account criteria entity " + accountCriteria);
-        Criteria criteria = new AccountCriteriaBuilder()
+        Criteria criteria = new CriteriaBuilder()
                 .containsIfNotNull(accountCriteria.getName(), "name")
                 .greaterThanEqualIfNotNull(accountCriteria.getBalanceGte(), "balance")
                 .lessThanEqualIfNotNull(accountCriteria.getBalanceLte(), "balance")
