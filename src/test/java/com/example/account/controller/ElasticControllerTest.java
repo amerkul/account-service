@@ -1,8 +1,8 @@
 package com.example.account.controller;
 
 import com.example.account.controller.dto.AccountCriteriaDto;
-import com.example.account.elastic.data.Account;
-import com.example.account.elastic.service.ElasticAccountService;
+import com.example.account.domain.data.Account;
+import com.example.account.service.ElasticAccountService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

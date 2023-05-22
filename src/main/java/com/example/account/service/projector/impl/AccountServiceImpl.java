@@ -1,6 +1,6 @@
 package com.example.account.service.projector.impl;
 
-import com.example.account.aggregate.AccountAggregate;
+import com.example.account.domain.aggregate.AccountAggregate;
 import com.example.account.repository.AccountRepository;
 import com.example.account.service.projector.AccountService;
 import lombok.AllArgsConstructor;

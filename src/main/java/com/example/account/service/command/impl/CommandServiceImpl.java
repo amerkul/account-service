@@ -1,13 +1,13 @@
 package com.example.account.service.command.impl;
 
-import com.example.account.aggregate.AccountAggregate;
-import com.example.account.command.CreateAccountCommand;
-import com.example.account.aggregate.BidStatus;
-import com.example.account.command.UpdateAccountCommand;
-import com.example.account.event.AccountCreatedEvent;
-import com.example.account.event.AccountUpdatedEvent;
-import com.example.account.event.EventHandler;
-import com.example.account.kafka.producer.ProducerService;
+import com.example.account.domain.aggregate.AccountAggregate;
+import com.example.account.domain.command.CreateAccountCommand;
+import com.example.account.domain.aggregate.BidStatus;
+import com.example.account.domain.command.UpdateAccountCommand;
+import com.example.account.domain.event.AccountCreatedEvent;
+import com.example.account.domain.event.AccountUpdatedEvent;
+import com.example.account.domain.event.EventHandler;
+import com.example.account.service.kafka.producer.ProducerService;
 import com.example.account.repository.AccountRepository;
 import com.example.account.service.command.CommandService;
 import lombok.AllArgsConstructor;

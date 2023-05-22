@@ -1,7 +1,7 @@
 package com.example.account.controller;
 
-import com.example.account.aggregate.AccountAggregate;
-import com.example.account.aggregate.BidStatus;
+import com.example.account.domain.aggregate.AccountAggregate;
+import com.example.account.domain.aggregate.BidStatus;
 import com.example.account.service.projector.AccountService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

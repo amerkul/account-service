@@ -1,7 +1,7 @@
 package com.example.account.controller;
 
-import com.example.account.aggregate.AccountAggregate;
-import com.example.account.command.CreateAccountCommand;
+import com.example.account.domain.aggregate.AccountAggregate;
+import com.example.account.domain.command.CreateAccountCommand;
 import com.example.account.service.command.CommandService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

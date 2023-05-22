@@ -1,6 +1,6 @@
 package com.example.account.controller;
 
-import com.example.account.aggregate.AccountAggregate;
+import com.example.account.domain.aggregate.AccountAggregate;
 import com.example.account.service.projector.AccountService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

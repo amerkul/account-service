@@ -1,7 +1,7 @@
 package com.example.account.controller;
 
-import com.example.account.aggregate.AccountAggregate;
-import com.example.account.command.CreateAccountCommand;
+import com.example.account.domain.aggregate.AccountAggregate;
+import com.example.account.domain.command.CreateAccountCommand;
 import com.example.account.service.command.CommandService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
