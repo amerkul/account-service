@@ -8,12 +8,17 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.elasticsearch.ElasticsearchContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers
 public class BaseElasticDockerConfiguration {
 
+    static final DockerImageName IMAGE_NAME = DockerImageName.parse("elasticsearch:7.17.10")
+            .asCompatibleSubstituteFor("docker.elastic.co/elasticsearch/elasticsearch");
+
     @Container
-    static ElasticsearchContainer elastic = new ElascticsearchContainerConfig();
+    static ElasticsearchContainer elastic = new ElascticsearchContainerConfig(IMAGE_NAME)
+            .addDefaultProperties();
 
     @DynamicPropertySource
     static void init(DynamicPropertyRegistry registry) {
@@ -21,7 +26,7 @@ public class BaseElasticDockerConfiguration {
     }
 
     @BeforeAll
-    static void create(){
+    static void create() {
         elastic.start();
     }
 

@@ -1,6 +1,7 @@
 package com.example.account.domain.data.criteria;
 
-import lombok.*;
+import lombok.Data;
+import lombok.ToString;
 
 @Data
 @ToString

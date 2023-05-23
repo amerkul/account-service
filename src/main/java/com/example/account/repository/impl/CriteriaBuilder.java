@@ -2,13 +2,7 @@ package com.example.account.repository.impl;
 
 import org.springframework.data.elasticsearch.core.query.Criteria;
 
-public final class CriteriaBuilder {
-
-    private final Criteria criteria = new Criteria();
-
-    public Criteria getCriteria(){
-        return criteria;
-    }
+public record CriteriaBuilder(Criteria criteria) {
 
     public CriteriaBuilder containsIfNotNull(Object object, String field) {
         if (object != null) {

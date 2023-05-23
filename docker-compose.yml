@@ -116,8 +116,8 @@ services:
       args:
         DEBEZIUM_VERSION: ${DEBEZIUM_VERSION}
     ports:
-      - 8083:8083
-      - 5005:5005
+      - "8083:8083"
+      - "5005:5005"
     links:
       - kafka
       - db
@@ -133,7 +133,7 @@ services:
   grafana:
     image: grafana/grafana:7.5.7
     ports:
-      - 3000:3000
+      - "3000:3000"
     restart: unless-stopped
     volumes:
       - grafana-data:/var/lib/grafana

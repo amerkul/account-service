@@ -13,7 +13,7 @@ public class AccountCriteriaQueryImpl implements AccountCriteriaQuery {
     @Override
     public CriteriaQuery createAccountCriteriaQuery(AccountCriteria accountCriteria) {
         log.debug("Account criteria entity " + accountCriteria);
-        Criteria criteria = new CriteriaBuilder()
+        Criteria criteria = new CriteriaBuilder(new Criteria())
                 .containsIfNotNull(accountCriteria.getName(), "name")
                 .greaterThanEqualIfNotNull(accountCriteria.getBalanceGte(), "balance")
                 .lessThanEqualIfNotNull(accountCriteria.getBalanceLte(), "balance")
@@ -21,7 +21,7 @@ public class AccountCriteriaQueryImpl implements AccountCriteriaQuery {
                 .isIfNotNull(accountCriteria.getAuctionId(), "auction_id")
                 .greaterThanEqualIfNotNull(accountCriteria.getReservedGte(), "reserved")
                 .lessThanEqualIfNotNull(accountCriteria.getReservedLte(), "reserved")
-                .getCriteria();
+                .criteria();
         return new CriteriaQuery(criteria);
     }
 

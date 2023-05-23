@@ -22,10 +22,13 @@ public class ElasticAccountCriteriaRepositoryImpl implements ElasticAccountCrite
     private final AccountCriteriaQuery accountCriteriaQuery;
 
     @Override
-    public Flux<Account> findByCriteria(AccountCriteria accountCriteria, Pageable pageable) {
+    public Flux<Account> findByCriteria(final AccountCriteria accountCriteria,
+                                        final Pageable pageable) {
         Query query = accountCriteriaQuery.createAccountCriteriaQuery(accountCriteria)
                 .setPageable(pageable);
-        Flux<SearchHit<Account>> flux = operations.search(query, Account.class, IndexCoordinates.of(ACCOUNT_INDEX));
+        Flux<SearchHit<Account>> flux = operations.search(
+                query, Account.class, IndexCoordinates.of(ACCOUNT_INDEX)
+        );
         return flux.map(SearchHit::getContent);
     }
 
