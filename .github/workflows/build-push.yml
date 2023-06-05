@@ -6,7 +6,6 @@ on:
 
 jobs:
   check:
-    if: github.event_name == 'pull_request'
     runs-on: ubuntu-20.04
     permissions:
       contents: read

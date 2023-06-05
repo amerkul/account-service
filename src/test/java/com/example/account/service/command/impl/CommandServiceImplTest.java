@@ -54,7 +54,7 @@ class CommandServiceImplTest {
     }
 
     @Test
-    void update() {
+    void updateAccount() {
         AccountAggregate accountAggregate = new AccountAggregate();
         accountAggregate.setAccountId(1L);
         accountAggregate.setReserved(22);
