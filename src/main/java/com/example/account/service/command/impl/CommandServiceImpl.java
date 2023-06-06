@@ -1,12 +1,13 @@
 package com.example.account.service.command.impl;
 
-import com.example.account.aggregate.AccountAggregate;
-import com.example.account.command.CreateAccountCommand;
-import com.example.account.aggregate.BidStatus;
-import com.example.account.command.UpdateAccountCommand;
-import com.example.account.event.AccountCreatedEvent;
-import com.example.account.event.AccountUpdatedEvent;
-import com.example.account.event.EventHandler;
+import com.example.account.domain.aggregate.AccountAggregate;
+import com.example.account.domain.command.CreateAccountCommand;
+import com.example.account.domain.aggregate.BidStatus;
+import com.example.account.domain.command.UpdateAccountCommand;
+import com.example.account.domain.event.AccountCreatedEvent;
+import com.example.account.domain.event.AccountUpdatedEvent;
+import com.example.account.domain.event.EventHandler;
+import com.example.account.service.kafka.producer.ProducerService;
 import com.example.account.repository.AccountRepository;
 import com.example.account.service.command.CommandService;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import reactor.core.publisher.Mono;
 @AllArgsConstructor
 public class CommandServiceImpl implements CommandService {
 
+    private final ProducerService producerService;
     private final AccountRepository accountRepository;
     private final EventHandler eventHandler;
 
@@ -34,6 +36,7 @@ public class CommandServiceImpl implements CommandService {
                     AccountCreatedEvent event = new AccountCreatedEvent();
                     event.apply(accountAggregate);
                     eventHandler.handle(event);
+                    producerService.send(event);
                 });
     }
 

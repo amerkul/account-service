@@ -5,50 +5,30 @@ on:
     branches: [main]
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
+  check:
+    runs-on: ubuntu-20.04
     permissions:
       contents: read
       packages: write
 
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
+      - uses: actions/checkout@v3
 
-    - name: Build with Maven
-      run: mvn --batch-mode --update-snapshots package
-    
-    - name: Build & push Docker image
-      uses: mr-smithers-excellent/docker-build-push@v5
-      with:
-        image: ${{ secrets.DOCKER_USERNAME }}/account-service
-        tags: 1.0.$GITHUB_RUN_NUMBER, latest         
-        registry: docker.io
-        dockerfile: Dockerfile
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        
-  deployment:
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
 
-    runs-on:
-      - self-hosted
-      - actions_runner_dev
+      - name: Build with Maven
+        run: mvn --batch-mode --update-snapshots package
 
-    steps:
-    - uses: actions/checkout@v3  
-    - name: Deploy to minikube
-      run: |
-          set -ex
-          cd $HOME
-          wget https://dl.k8s.io/release/v1.27.0/bin/linux/amd64/kubectl
-          chmod +x ./kubectl
-          ./kubectl auth can-i get pods
-          ./kubectl get pods 
-          ./kubectl set image deployment.apps/account account=amerkul/account-service:latest
-          ./kubectl rollout restart deployment.apps/account
+      - name: Build & push Docker image
+        uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: ${{ secrets.DOCKER_USERNAME }}/account-service
+          tags: 1.0.$GITHUB_RUN_NUMBER, latest
+          registry: docker.io
+          dockerfile: Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}

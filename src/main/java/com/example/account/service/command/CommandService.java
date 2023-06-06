@@ -1,8 +1,8 @@
 package com.example.account.service.command;
 
-import com.example.account.aggregate.AccountAggregate;
-import com.example.account.command.CreateAccountCommand;
-import com.example.account.command.UpdateAccountCommand;
+import com.example.account.domain.aggregate.AccountAggregate;
+import com.example.account.domain.command.CreateAccountCommand;
+import com.example.account.domain.command.UpdateAccountCommand;
 import reactor.core.publisher.Mono;
 
 public interface CommandService {

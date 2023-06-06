@@ -11,5 +11,5 @@ CREATE TABLE account (
     balance INTEGER NOT NULL,
     reserved INTEGER NOT NULL,
     status VARCHAR(10) NOT NULL,
-    auctionId BIGINT NOT NULL
+    auction_id VARCHAR(100) NOT NULL
 );
