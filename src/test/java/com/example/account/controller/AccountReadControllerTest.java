@@ -27,7 +27,7 @@ class AccountReadControllerTest {
         AccountAggregate account2 = new AccountAggregate(2L, "fdf", 4, 3, BidStatus.PENDING, "dskk");
         AccountAggregate account3 = new AccountAggregate();
         Flux<AccountAggregate> flux = Flux.just(account1, account2, account3);
-        when(service.retrieveAllEvents()).thenReturn(flux);
+        when(service.retrieveAll()).thenReturn(flux);
         Flux<AccountAggregate> result = controller.list();
         StepVerifier.create(result)
                 .expectNextCount(3)

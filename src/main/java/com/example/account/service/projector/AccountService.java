@@ -4,6 +4,6 @@ import com.example.account.domain.aggregate.AccountAggregate;
 import reactor.core.publisher.Flux;
 
 public interface AccountService {
-    Flux<AccountAggregate> retrieveAllEvents();
+    Flux<AccountAggregate> retrieveAll();
 
 }

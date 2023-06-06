@@ -14,7 +14,7 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository repository;
 
     @Override
-    public Flux<AccountAggregate> retrieveAllEvents() {
+    public Flux<AccountAggregate> retrieveAll() {
         return repository.findAll();
     }
 

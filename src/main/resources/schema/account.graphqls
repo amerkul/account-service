@@ -1,0 +1,23 @@
+type Query {
+    accounts: [AccountAggregate]
+}
+
+type Mutation {
+    newAccount(account: AccountInput!): AccountAggregate
+}
+
+input AccountInput {
+    name: String!
+    balance: Int!
+    reserved: Int!
+    auctionId: String!
+}
+
+type AccountAggregate {
+    accountId: Int!
+    name: String!
+    balance: Int!
+    reserved: Int!
+    status: String!
+    auctionId: String
+}
