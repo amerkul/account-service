@@ -1,6 +1,7 @@
 package com.example.account.service.projector.impl;
 
 import com.example.account.domain.aggregate.AccountAggregate;
+import com.example.account.domain.aggregate.filter.AccountFilter;
 import com.example.account.repository.AccountRepository;
 import com.example.account.service.projector.AccountService;
 import lombok.AllArgsConstructor;
@@ -14,8 +15,13 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository repository;
 
     @Override
-    public Flux<AccountAggregate> retrieveAllEvents() {
+    public Flux<AccountAggregate> retrieveAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public Flux<AccountAggregate> retrieveAllByFilter(AccountFilter filter) {
+        return repository.findByFilter(filter);
     }
 
 }

@@ -19,7 +19,7 @@ public class ElasticAccountCriteriaRepositoryImpl implements ElasticAccountCrite
     private static final String ACCOUNT_INDEX = "account";
 
     private final ReactiveElasticsearchOperations operations;
-    private final AccountCriteriaQuery accountCriteriaQuery;
+    private final ElasticAccountCriteriaQuery accountCriteriaQuery;
 
     @Override
     public Flux<Account> findByCriteria(final AccountCriteria accountCriteria,

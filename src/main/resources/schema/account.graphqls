@@ -1,0 +1,43 @@
+type Query {
+    accounts(filter: AccountFilter): [AccountAggregate]
+    host: String
+    cookie: String
+    customContextState: String!
+}
+
+type Mutation {
+    newAccount(account: AccountInput!): AccountAggregate
+    updateCookie(value: String!): String!
+}
+
+input AccountInput {
+    name: String!
+    balance: Int!
+    reserved: Int!
+    auctionId: String!
+}
+
+type AccountAggregate {
+    accountId: Int!
+    name: String!
+    balance: Int!
+    reserved: Int!
+    status: BidStatus!
+    auctionId: String
+    bookmarks: [Bookmark]
+}
+
+type Bookmark {
+    bookmarkId: Int!
+    title: String!
+    releaseYear: Int!
+}
+
+input AccountFilter {
+    name: String
+    status: BidStatus
+}
+
+enum BidStatus {
+    ACCEPTED, REJECTED, PENDING
+}

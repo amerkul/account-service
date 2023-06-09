@@ -19,6 +19,12 @@ public class ElasticAccountServiceImpl implements ElasticAccountService {
     private final ElasticAccountRepository elasticAccountRepository;
 
     @Override
+    public Flux<Account> retrieveAll() {
+        log.debug("Retrieving all accounts...");
+        return elasticAccountRepository.findAll();
+    }
+
+    @Override
     public Mono<Account> retrieveById(long id) {
         log.debug("Retrieving account by id={}", id);
         return elasticAccountRepository.findById(id).log();

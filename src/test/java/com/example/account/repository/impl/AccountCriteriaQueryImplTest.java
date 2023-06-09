@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class AccountCriteriaQueryImplTest {
     @Test
     void createAccountCriteriaQuery() {
-        AccountCriteriaQuery accountCriteriaQuery = new AccountCriteriaQueryImpl();
+        ElasticAccountCriteriaQuery accountCriteriaQuery = new ElasticAccountCriteriaQueryImpl();
         AccountCriteria accountCriteria = new AccountCriteria();
         accountCriteria.setName("hhjj");
         CriteriaQuery query = accountCriteriaQuery.createAccountCriteriaQuery(accountCriteria);

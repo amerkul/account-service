@@ -20,7 +20,7 @@ public class AccountReadController {
     @GetMapping("/all")
     public Flux<AccountAggregate> list() {
         log.info("Get list accounts...");
-        return service.retrieveAllEvents();
+        return service.retrieveAll();
     }
 
 }

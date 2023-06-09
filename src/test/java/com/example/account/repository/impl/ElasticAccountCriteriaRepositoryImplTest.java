@@ -24,7 +24,7 @@ class ElasticAccountCriteriaRepositoryImplTest extends BaseElasticDockerConfigur
     ElasticAccountRepository elasticAccountRepository;
 
     @MockBean
-    AccountCriteriaQuery accountCriteriaQuery;
+    ElasticAccountCriteriaQuery accountCriteriaQuery;
 
     @Test
     void findByCriteria() {
