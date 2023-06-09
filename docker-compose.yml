@@ -37,6 +37,7 @@ services:
     depends_on:
       - db
       - kafka
+      - elasticsearch
     networks:
       - account
   zookeeper:

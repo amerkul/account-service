@@ -141,6 +141,7 @@
 							<includes>com.example.account.controller.*</includes>
 							<includes>com.example.account.repository.*</includes>
 							<includes>com.example.account.service.*</includes>
+							<includes>com.example.account.graphql.*</includes>
 							<rules>
 								<rule>
 									<element>PACKAGE</element>

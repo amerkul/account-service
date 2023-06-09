@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class AccountCriteriaQueryImpl implements AccountCriteriaQuery {
+public class ElasticAccountCriteriaQueryImpl implements ElasticAccountCriteriaQuery {
 
     @Override
     public CriteriaQuery createAccountCriteriaQuery(AccountCriteria accountCriteria) {
         log.debug("Account criteria entity " + accountCriteria);
-        Criteria criteria = new CriteriaBuilder(new Criteria())
+        Criteria criteria = new ElasticCriteriaBuilder(new Criteria())
                 .containsIfNotNull(accountCriteria.getName(), "name")
                 .greaterThanEqualIfNotNull(accountCriteria.getBalanceGte(), "balance")
                 .lessThanEqualIfNotNull(accountCriteria.getBalanceLte(), "balance")

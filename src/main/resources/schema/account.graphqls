@@ -1,9 +1,13 @@
 type Query {
-    accounts: [AccountAggregate]
+    accounts(filter: AccountFilter): [AccountAggregate]
+    host: String
+    cookie: String
+    customContextState: String!
 }
 
 type Mutation {
     newAccount(account: AccountInput!): AccountAggregate
+    updateCookie(value: String!): String!
 }
 
 input AccountInput {
@@ -18,6 +22,22 @@ type AccountAggregate {
     name: String!
     balance: Int!
     reserved: Int!
-    status: String!
+    status: BidStatus!
     auctionId: String
+    bookmarks: [Bookmark]
+}
+
+type Bookmark {
+    bookmarkId: Int!
+    title: String!
+    releaseYear: Int!
+}
+
+input AccountFilter {
+    name: String
+    status: BidStatus
+}
+
+enum BidStatus {
+    ACCEPTED, REJECTED, PENDING
 }

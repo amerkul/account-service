@@ -13,4 +13,6 @@ public interface ElasticAccountService {
     Flux<Account> retrieveByBalanceBetween(int from, int to);
     Flux<Account> retrieveByParams(AccountCriteria criteria, Pageable pageable);
 
+    Flux<Account> retrieveAll();
+
 }

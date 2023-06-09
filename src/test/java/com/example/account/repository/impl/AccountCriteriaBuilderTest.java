@@ -10,13 +10,13 @@ class AccountCriteriaBuilderTest {
 
     @Test
     void getCriteria() {
-        Criteria criteria = new CriteriaBuilder(new Criteria()).criteria();
+        Criteria criteria = new ElasticCriteriaBuilder(new Criteria()).criteria();
         assertNotNull(criteria);
     }
 
     @Test
     void containsIfNotNull() {
-        Criteria criteria = new CriteriaBuilder(new Criteria())
+        Criteria criteria = new ElasticCriteriaBuilder(new Criteria())
                 .containsIfNotNull("sdjcn", "cdkmxkds")
                 .criteria();
         assertEquals(1, criteria.getCriteriaChain().size());
@@ -24,7 +24,7 @@ class AccountCriteriaBuilderTest {
 
     @Test
     void isIfNotNull() {
-        Criteria criteria = new CriteriaBuilder(new Criteria())
+        Criteria criteria = new ElasticCriteriaBuilder(new Criteria())
                 .isIfNotNull("sdjcn", "cdkmxkds")
                 .criteria();
         assertEquals(1, criteria.getCriteriaChain().size());
@@ -32,7 +32,7 @@ class AccountCriteriaBuilderTest {
 
     @Test
     void greaterThanEqualIfNotNull() {
-        Criteria criteria = new CriteriaBuilder(new Criteria())
+        Criteria criteria = new ElasticCriteriaBuilder(new Criteria())
                 .greaterThanEqualIfNotNull(12, "cdkmxkds")
                 .criteria();
         assertEquals(1, criteria.getCriteriaChain().size());
@@ -40,7 +40,7 @@ class AccountCriteriaBuilderTest {
 
     @Test
     void lessThanEqualIfNotNull() {
-        Criteria criteria = new CriteriaBuilder(new Criteria())
+        Criteria criteria = new ElasticCriteriaBuilder(new Criteria())
                 .greaterThanEqualIfNotNull(12, "cdkmxkds")
                 .criteria();
         assertEquals(1, criteria.getCriteriaChain().size());
